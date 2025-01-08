@@ -11,15 +11,6 @@ const upload = multer({ dest: 'uploads/' });
 // Trust proxy for Cloudflare
 app.set('trust proxy', true);
 
-// HTTPS redirection middleware
-app.use((req, res, next) => {
-  if (req.secure || req.headers['x-forwarded-proto'] === 'https') {
-    next();
-  } else {
-    res.redirect(`https://${req.headers.host}${req.url}`);
-  }
-});
-
 app.use(cors());
 app.use(express.json());
 
