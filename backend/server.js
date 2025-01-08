@@ -3,12 +3,16 @@ const cors = require('cors');
 const multer = require('multer');
 const { parse } = require('csv-parse');
 const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from React build
+app.use(express.static(path.join(__dirname, 'dist')));
 
 function parseTime(timeStr) {
     // Ensure the time string is in HH:mm format
@@ -228,6 +232,11 @@ app.post('/api/analyze', upload.single('file'), (req, res) => {
                 companyStats
             });
         });
+});
+
+// Handle React routing, return all requests to React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3001;

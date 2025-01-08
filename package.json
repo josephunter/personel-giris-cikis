@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "Aritatürk Personel Giriş Çıkış Takip Sistemi",
   "scripts": {
-    "start": "concurrently \"cd backend && node server.js\" \"cd frontend && npm run dev\"",
-    "install-deps": "npm install && cd frontend && npm install && cd ../backend && npm install"
-  },
-  "dependencies": {
-    "concurrently": "^8.2.2"
+    "start": "node backend/server.js",
+    "build": "cd frontend && npm install && npm run build && mkdir -p ../backend/dist && cp -r dist/* ../backend/dist/",
+    "postinstall": "cd backend && npm install"
   }
 } 

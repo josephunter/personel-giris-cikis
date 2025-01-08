@@ -59,7 +59,7 @@ function App() {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3001/api/analyze', formData);
+      const response = await axios.post('/api/analyze', formData);
       setAnalysisResult(response.data);
     } catch (error) {
       console.error('Error analyzing file:', error);
